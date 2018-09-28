@@ -23,6 +23,7 @@ suites:
     run_list:
       - recipe[cassandra-cluster::default]
       - recipe[cassandra-cluster::install]
+      - recipe[cassandra-cluster::config]
     verifier:
       inspec_tests:
         - test/integration/default

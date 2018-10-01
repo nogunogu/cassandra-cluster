@@ -13,3 +13,20 @@ template '/etc/cassandra/jmxremote.password' do
     :jmx_password => passwords['jmx_password']
   )
 end
+
+template '/etc/cassandra/cassandra-env.sh' do
+  source 'cassandra-env.sh.erb'
+  owner  'root'
+  group  'root'
+  mode   '0644'
+  variables(
+    :local_jmx => 'no'
+  )
+end
+
+template "#{node['java']['java_home']}/jre/lib/management/jmxremote.access" do
+  source 'jmxremote.access.erb'
+  variables(
+    :role => "#{passwords['jmx_user']} readwrite"
+  )
+end

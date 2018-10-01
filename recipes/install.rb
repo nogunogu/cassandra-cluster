@@ -20,3 +20,7 @@ package 'dstat'
 package 'htop'
 # enable 'iostat'
 package 'sysstat'
+
+include_recipe 'cassandra-cluster::jmxremote'
+include_recipe 'cassandra-cluster::cassandra.yaml'
+include_recipe 'cassandra-cluster::reset'

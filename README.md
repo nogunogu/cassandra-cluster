@@ -22,6 +22,20 @@ Install Cassandra to each node.
 knife bootstrap $IP_ADDRESS --ssh-user $USERNAME --sudo --ssh-identity-file $FILE --node-name $NODE_NAME --run-list 'recipe[cassandra-cluster::install]'
 ```
 
+### Install from tar
+if you use `install_from_tar`, you need to add the followings to `~/.profile`
+```
+export PATH="/usr/local/cassandra/bin:$PATH"
+export CQLSH_NO_BUNDLED=true
+```
+
+if you want to apply without re-login, run this:
+```
+$ source ~/.profile
+```
+
+
+
 ## Clustering
 1. Create a new role for each DC on Chef-Server, and set attributes like this:
 ```

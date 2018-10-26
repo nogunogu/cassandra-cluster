@@ -2,11 +2,15 @@ default['java']['install_flavor'] = 'openjdk'
 default['java']['openjdk_packages'] = ['openjdk-8-jre-headless']
 default['java']['jdk_version'] = '8'
 
+default['cassandra']['conf_path'] = '/etc/cassandra'
+
 # for cassandra.yaml
 default['cassandra']['seeds'] = 'localhost'
 default['cassandra']['listen_address'] = 'localhost'
 default['cassandra']['cluster_name'] = 'Test Cluster1'
 default['cassandra']['auto_bootstrap'] = 'true'
+default['cassandra']['rpc_address'] = 'localhost'
+default['cassandra']['jmx_auth'] = false
 
 
 # for cluster settings

@@ -954,7 +954,9 @@ enable_scripted_user_defined_functions: false
 
 # Enables materialized view creation on this node.
 # Materialized views are considered experimental and are not recommended for production use.
+<% if !node['cassandra']['cannot_use_materialized_views']  %>
 enable_materialized_views: true
+<% end %>
 
 # The default Windows kernel timer and scheduling resolution is 15.6ms for power conservation.
 # Lowering this value on Windows can provide much tighter latency and better throughput, however

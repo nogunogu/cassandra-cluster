@@ -1,9 +1,10 @@
 passwords = data_bag_item('passwords', 'jmxremote')
+conf_dir = node['cassandra']['conf_dir'] ? node['cassandra']['conf_dir'] : '/etc/cassandra'
 
 log "jmx_user is #{passwords['jmx_user']}"
 log "jmx_user is #{passwords['jmx_password']}"
 
-template "#{node['cassandra']['conf_path']}/jmxremote.password" do
+template "#{conf_dir}/jmxremote.password" do
   source 'jmxremote.password.erb'
   owner  'cassandra'
   group  'cassandra'
@@ -11,17 +12,6 @@ template "#{node['cassandra']['conf_path']}/jmxremote.password" do
   variables(
     :jmx_user => passwords['jmx_user'],
     :jmx_password => passwords['jmx_password']
-  )
-end
-
-template "#{node['cassandra']['conf_path']}/cassandra-env.sh" do
-  source 'cassandra-env.sh.erb'
-  owner  'root'
-  group  'root'
-  mode   '0644'
-  variables(
-    :local_jmx => 'no',
-    :jmx_auth  => "#{node['cassandra']['jmx_auth']}"
   )
 end
 

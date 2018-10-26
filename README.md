@@ -5,6 +5,17 @@ Setup Cassandra cluster on Google Cloud Platform with Chef-Server
 ## Precondition
 GCP and Chef Server are setup already.
 
+レシピ概要
+install: apt-getでCassandraをインストールする
+install_from_tar: tarからインストールする。installとは排他関係
+cassandra-env.sh: 基本的には単独で呼ばない。install系から呼ばれる。再起動は呼び出し側で。
+cassandra.yaml: install系から呼ばれるか、設定変更時に利用。再起動は別途呼び出す必要あり。
+jmxremote: remote JMXの変更をするとき。再起動は別途呼び出す。
+cluster: クラスタ用の設定を反映させるときに。
+monitoring: Metricsの設定を行う。
+reset: Cassandraのsystemファイルを削除して再起動。
+
+
 ## Initialize
 Install Cassandra to each node.
 ```

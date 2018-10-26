@@ -277,8 +277,8 @@ JVM_OPTS="$JVM_OPTS -Djava.net.preferIPv4Stack=true"
 # JVM_OPTS="$JVM_OPTS -Djava.rmi.server.hostname=<public name>"
 #
 
-<% if node[:cassandra][:enable_metrics] %>
-JVM_OPTS="$JVM_OPTS -Dcassandra.metricsReporterConfigFile=metrics_reporter_graphite.yaml"
+<% if node[:cassandra][:metrics_config_file] %>
+JVM_OPTS="$JVM_OPTS -Dcassandra.metricsReporterConfigFile=<%= node['cassandra']['metrics_config_file'] %>"
 <% end %>
 
 # see

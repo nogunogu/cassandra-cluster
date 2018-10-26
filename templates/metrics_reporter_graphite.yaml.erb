@@ -4,7 +4,7 @@ graphite:
   timeunit: 'SECONDS'
   prefix: '<%= @prefix %>.cassandra'
   hosts:
-   - host: 'graphite-docker'
+   - host: '<%= @graphite_server %>'
      port: 2003
   predicate:
     color: 'white'
@@ -12,7 +12,10 @@ graphite:
     patterns:
       - '^jvm.gc.*'
       - '^jvm.memory.*'
-      - '^org.apache.cassandra.metrics.Storage.+'
+      - '^org.apache.cassandra.metrics.DroppedMessages.+'
+      - '^org.apache.cassandra.metrics.ClientRequest.Failures.+'
+      - '^org.apache.cassandra.metrics.ClientRequest.Latency.Read.count'
+      - '^org.apache.cassandra.metrics.ClientRequest.Latency.Write.count'
 
 # console:
 #   -

@@ -22,7 +22,7 @@ suites:
   - name: default
     data_bags_path: test/data_bags
     run_list:
-      - recipe[cassandra-cluster::install]
+      - recipe[cassandra-cluster::install_from_tar]
     verifier:
       inspec_tests:
         - test/integration/default

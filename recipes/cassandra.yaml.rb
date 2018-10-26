@@ -1,4 +1,6 @@
-template "#{node['cassandra']['conf_path']}/cassandra.yaml" do
+conf_dir = node['cassandra']['conf_dir'] ? node['cassandra']['conf_dir'] : '/etc/cassandra'
+
+template "#{conf_dir}/cassandra.yaml" do
   source 'cassandra.yaml.erb'
   variables(
     :cluster_name   => node['cassandra']['cluster_name'],

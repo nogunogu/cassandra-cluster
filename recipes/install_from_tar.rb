@@ -3,12 +3,29 @@ include_recipe 'java'
 python_runtime '2'
 python_package 'cassandra-driver'
 
+deployed_dir = "/opt/apache-cassandra-#{node['cassandra']['tar_version']}"
+
 tar_extract "http://archive.apache.org/dist/cassandra/#{node['cassandra']['tar_version']}/apache-cassandra-#{node['cassandra']['tar_version']}-bin.tar.gz" do
-  target_dir '/usr/local/cassandra'
-  creates '/usr/local/cassandra/lib'
+  target_dir '/opt'
+  creates "#{deployed_dir}/lib"
   user 'root'
 end
 
-node.override['cassandra']['conf_path'] = "/usr/local/cassandra/apache-cassandra-#{node['cassandra']['tar_version']}/conf"
+link "#{node['cassandra']['home']}" do
+  to "#{deployed_dir}"
+end
+
+# override parameters for the recipes following
+node.override['cassandra']['conf_dir'] = "#{node['cassandra']['home']}/conf"
+node.override['cassandra']['cannot_use_materialized_views'] = true
 
 include_recipe 'cassandra-cluster::cassandra.yaml'
+include_recipe 'cassandra-cluster::cassandra-env.sh'
+
+template "/usr/local/bin/cassandra-ctrl" do
+  source 'cassandra-ctrl.erb'
+  mode '0755'
+  variables(
+    :bin_dir => "#{node['cassandra']['home']}/bin"
+  )
+end

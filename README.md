@@ -11,6 +11,7 @@ install_from_tar: tarからインストールする。installとは排他関係
 cassandra-env.sh: 基本的には単独で呼ばない。install系から呼ばれる。再起動は呼び出し側で。
 cassandra.yaml: install系から呼ばれるか、設定変更時に利用。再起動は別途呼び出す必要あり。
 jmxremote: remote JMXの変更をするとき。再起動は別途呼び出す。
+jvm.options: GCのタイプ変更。
 cluster: クラスタ用の設定を反映させるときに。
 monitoring: Metricsの設定を行う。
 reset: Cassandraのsystemファイルを削除して再起動。
@@ -53,8 +54,9 @@ $ source ~/.profile
 }
 ```
 1. Change run-list for each node to the new role you just created.
-1.
 
+
+## Sample keyspace & table
 CREATE KEYSPACE my_keyspace WITH replication = {'class': 'NetworkTopologyStrategy', 'DC1': '3', 'DC2': '2'}  AND durable_writes = true;
 
 CREATE TABLE my_keyspace.members (

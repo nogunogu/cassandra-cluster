@@ -35,3 +35,6 @@ default['cassandra']['enable_metrics'] = false
 default['cassandra']['metrics_graphite_version'] = '3.1.5'
 default['cassandra']['metrics_jvm_version'] = '3.1.5'
 default['graphite']['hostname'] = 'dummy-host'
+
+# for jvm.options 
+default['cassandra']['use_g1gc'] = false

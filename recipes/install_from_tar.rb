@@ -21,6 +21,8 @@ node.override['cassandra']['cannot_use_materialized_views'] = true
 
 include_recipe 'cassandra-cluster::cassandra.yaml'
 include_recipe 'cassandra-cluster::cassandra-env.sh'
+include_recipe 'cassandra-cluster::jvm.options'
+
 
 template "/usr/local/bin/cassandra-ctrl" do
   source 'cassandra-ctrl.erb'

@@ -277,7 +277,7 @@ JVM_OPTS="$JVM_OPTS -Djava.net.preferIPv4Stack=true"
 # JVM_OPTS="$JVM_OPTS -Djava.rmi.server.hostname=<public name>"
 #
 
-<% if node[:cassandra][:metrics_config_file] %>
+<% if node[:cassandra][:enable_metrics] %>
 JVM_OPTS="$JVM_OPTS -Dcassandra.metricsReporterConfigFile=<%= node['cassandra']['metrics_config_file'] %>"
 <% end %>
 
@@ -293,7 +293,7 @@ JVM_OPTS="$JVM_OPTS -Dcassandra.metricsReporterConfigFile=<%= node['cassandra'][
 #if [ "x$LOCAL_JMX" = "x" ]; then
 #    LOCAL_JMX=yes
 #fi
-LOCAL_JMX=<%= @local_jmx %>
+LOCAL_JMX=<%= node['cassandra']['local_jmx'] %>
 
 # Specifies the default port over which Cassandra will be available for
 # JMX connections.
@@ -306,7 +306,7 @@ else
   JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.port=$JMX_PORT"
   JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.rmi.port=$JMX_PORT"
   JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.ssl=false"
-  JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.authenticate=<%= @jmx_auth %>"
+  JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.authenticate=<%= node['cassandra']['jmx_auth'] %>"
   JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.password.file=/etc/cassandra/jmxremote.password"
 #  JVM_OPTS="$JVM_OPTS -Djavax.net.ssl.keyStore=/path/to/keystore"
 #  JVM_OPTS="$JVM_OPTS -Djavax.net.ssl.keyStorePassword=<keystore-password>"

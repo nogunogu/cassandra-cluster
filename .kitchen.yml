@@ -22,8 +22,15 @@ suites:
   - name: default
     data_bags_path: test/data_bags
     run_list:
-      - recipe[cassandra-cluster::install_from_tar]
+      - recipe[cassandra-cluster::default]
+      - recipe[cassandra-cluster::monitoring]
     verifier:
       inspec_tests:
         - test/integration/default
-    attributes:
+    attributes: {
+        cassandra: {
+          tar_install: true,
+          tar_version: "3.0.7",
+          enable_metrics: true
+        }
+      }

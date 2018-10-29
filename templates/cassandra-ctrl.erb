@@ -21,7 +21,7 @@ stop () {
 }
 
 start () {
-  sudo <%= @bin_dir %>/cassandra
+  sudo <%= node['cassandra']['home'] %>/bin/cassandra
 }
 
 case $1 in

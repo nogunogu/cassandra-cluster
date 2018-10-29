@@ -281,6 +281,10 @@ JVM_OPTS="$JVM_OPTS -Djava.net.preferIPv4Stack=true"
 JVM_OPTS="$JVM_OPTS -Dcassandra.metricsReporterConfigFile=<%= node['cassandra']['metrics_config_file'] %>"
 <% end %>
 
+<% if node[:cassandra][:use_jolokia] %>
+JVM_OPTS="$JVM_OPTS -javaagent:<%= node['cassandra']['lib_dir'] %>/jolokia-jvm-<%= node['cassandra']['jolokia_version'] %>-agent.jar=config=<%= node['cassandra']['conf_dir'] %>/jolokia.properties"
+<% end %>
+
 # see
 # https://blogs.oracle.com/jmxetc/entry/troubleshooting_connection_problems_in_jconsole
 # for more on configuring JMX through firewalls, etc. (Short version:

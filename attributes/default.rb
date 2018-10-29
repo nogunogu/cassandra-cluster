@@ -36,5 +36,9 @@ default['cassandra']['metrics_graphite_version'] = '3.1.5'
 default['cassandra']['metrics_jvm_version'] = '3.1.5'
 default['graphite']['hostname'] = 'dummy-host'
 
-# for jvm.options 
+# for jvm.options
 default['cassandra']['use_g1gc'] = false
+
+# for jolokia
+default['cassandra']['use_jolokia'] = true
+default['cassandra']['jolokia_version'] = '1.6.0'

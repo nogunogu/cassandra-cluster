@@ -3,6 +3,8 @@ include_recipe 'java'
 python_runtime '2'
 python_package 'cassandra-driver'
 
+node.override['cassandra']['tar_install'] = true
+
 deployed_dir = "/opt/apache-cassandra-#{node['cassandra']['tar_version']}"
 
 tar_extract "http://archive.apache.org/dist/cassandra/#{node['cassandra']['tar_version']}/apache-cassandra-#{node['cassandra']['tar_version']}-bin.tar.gz" do
@@ -16,9 +18,9 @@ link "#{node['cassandra']['home']}" do
 end
 
 # override parameters for the recipes following
-node.override['cassandra']['conf_dir'] = "#{node['cassandra']['home']}/conf"
 node.override['cassandra']['cannot_use_materialized_views'] = true
 
+include_recipe 'cassandra-cluster::set_parameters'
 include_recipe 'cassandra-cluster::cassandra.yaml'
 include_recipe 'cassandra-cluster::cassandra-env.sh'
 include_recipe 'cassandra-cluster::jvm.options'

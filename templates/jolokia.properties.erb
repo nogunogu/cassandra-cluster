@@ -1,0 +1,20 @@
+host=0.0.0.0
+port=7777
+agentContext=/jolokia
+backlog=100
+
+# executor=fixed
+# nrThreads=5
+
+# user=bragg
+# password=secret
+
+policyLocation=file://<%= node['cassandra']['conf_dir'] %>/jolokia.policy
+
+historyMaxEntries=10
+debug=false
+debugMaxEntries=100
+
+maxDepth=15
+maxCollectionSize=1000
+maxObjects=0

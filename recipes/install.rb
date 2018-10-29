@@ -21,6 +21,7 @@ package 'htop'
 # enable 'iostat'
 package 'sysstat'
 
+include_recipe 'cassandra-cluster::set_parameters'
 include_recipe 'cassandra-cluster::cassandra-env.sh'
 # include_recipe 'cassandra-cluster::jmxremote'
 include_recipe 'cassandra-cluster::cassandra.yaml'

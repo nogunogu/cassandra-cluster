@@ -3,10 +3,9 @@ default['java']['openjdk_packages'] = ['openjdk-8-jre-headless']
 default['java']['jdk_version'] = '8'
 
 
-# for tar install ---->
-default['cassandra']['home'] = '/usr/local/cassandra'
+# for tar install
+default['cassandra']['tar_install'] = false
 default['cassandra']['tar_version'] = '3.0.9'
-# for tar install <----
 
 # for cassandra.yaml
 default['cassandra']['seeds'] = 'localhost'
@@ -14,6 +13,9 @@ default['cassandra']['listen_address'] = 'localhost'
 default['cassandra']['cluster_name'] = 'Test Cluster1'
 default['cassandra']['auto_bootstrap'] = 'true'
 default['cassandra']['rpc_address'] = 'localhost'
+
+# for jmxremote
+default['cassandra']['local_jmx'] = 'yes'
 default['cassandra']['jmx_auth'] = false
 
 
@@ -34,7 +36,8 @@ default['cassandra']['topology'] = '
 default['cassandra']['enable_metrics'] = false
 default['cassandra']['metrics_graphite_version'] = '3.1.5'
 default['cassandra']['metrics_jvm_version'] = '3.1.5'
+default['cassandra']['metrics_config_file'] = 'metrics_reporter_graphite.yaml'
 default['graphite']['hostname'] = 'dummy-host'
 
-# for jvm.options 
+# for jvm.options
 default['cassandra']['use_g1gc'] = false

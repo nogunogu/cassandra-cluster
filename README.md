@@ -29,6 +29,8 @@ if you use `install_from_tar`, you need to add the followings to `~/.profile`
 export PATH="/usr/local/cassandra/bin:$PATH"
 export CQLSH_NO_BUNDLED=true
 ```
+echo 'PATH="/usr/loca/cassandra/bin:$PATH"' >> ~/.profile
+echo "export CQLSH_NO_BUNDLED=true" >> ~/.profile
 
 if you want to apply without re-login, run this:
 ```
@@ -64,3 +66,9 @@ CREATE TABLE my_keyspace.members (
     email text,
     name text
 );
+
+
+## jolokia
+```
+curl localhost:7777/jolokia/read/java.lang:type=Memory/HeapMemoryUsage | jq .
+```

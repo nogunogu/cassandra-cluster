@@ -3,7 +3,7 @@ include_recipe 'java'
 python_runtime '2'
 python_package 'cassandra-driver'
 
-node.override['cassandra']['tar_install'] = true
+include_recipe 'cassandra-cluster::set_parameters'
 
 deployed_dir = "/opt/apache-cassandra-#{node['cassandra']['tar_version']}"
 
@@ -20,7 +20,6 @@ end
 # override parameters for the recipes following
 node.override['cassandra']['cannot_use_materialized_views'] = true
 
-include_recipe 'cassandra-cluster::set_parameters'
 include_recipe 'cassandra-cluster::cassandra.yaml'
 include_recipe 'cassandra-cluster::cassandra-env.sh'
 include_recipe 'cassandra-cluster::jvm.options'
@@ -29,7 +28,4 @@ include_recipe 'cassandra-cluster::jvm.options'
 template "/usr/local/bin/cassandra-ctrl" do
   source 'cassandra-ctrl.erb'
   mode '0755'
-  variables(
-    :bin_dir => "#{node['cassandra']['home']}/bin"
-  )
 end

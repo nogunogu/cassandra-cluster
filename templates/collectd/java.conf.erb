@@ -1,0 +1,78 @@
+LoadPlugin java
+<Plugin "java">
+  JVMArg "-Djava.class.path=/usr/share/collectd/java/collectd-api.jar:/usr/share/collectd/java/generic-jmx.jar"
+  LoadPlugin "org.collectd.java.GenericJMX"
+  <Plugin "GenericJMX">
+
+    # Garbage collector information
+    <MBean "gc-count">
+      ObjectName "java.lang:type=GarbageCollector,*"
+      InstancePrefix "gc-"
+      InstanceFrom "name"
+      <Value>
+        Type "derive"
+        Table false
+        Attribute "CollectionCount"
+        InstancePrefix "count"
+      </Value>
+    </MBean>
+    <MBean "gc-time">
+      ObjectName "java.lang:type=GarbageCollector,*"
+      InstancePrefix "gc-"
+      InstanceFrom "name"
+      <Value>
+        Type "derive"
+        Table false
+        Attribute "CollectionTime"
+        InstancePrefix "time"
+      </Value>
+    </MBean>
+
+    # Generic heap/nonheap memory usage.
+    <MBean "memory-heap">
+      ObjectName "java.lang:type=Memory"
+      InstancePrefix "memory-heap"
+      <Value>
+        Type "memory"
+        Table true
+        Attribute "HeapMemoryUsage"
+      </Value>
+    </MBean>
+    <MBean "memory-nonheap">
+      ObjectName "java.lang:type=Memory"
+      InstancePrefix "memory-nonheap"
+      <Value>
+        Type "memory"
+        Table true
+        Attribute "NonHeapMemoryUsage"
+      </Value>
+    </MBean>
+
+    # Memory usage by memory pool.
+    <MBean "memory_pool">
+      ObjectName "java.lang:type=MemoryPool,*"
+      InstancePrefix "memory_pool-"
+      InstanceFrom "name"
+
+      <Value>
+        Type "memory"
+        #InstancePrefix ""
+        #InstanceFrom ""
+        Table true
+        Attribute "Usage"
+      </Value>
+    </MBean>
+
+    #####################
+    # Connection blocks #
+    #####################
+    <Connection>
+      ServiceURL "service:jmx:rmi:///jndi/rmi://localhost:7199/jmxrmi"
+      Collect "gc-time"
+      Collect "gc-count"
+      Collect "memory-heap"
+      Collect "memory-nonheap"
+      Collect "memory_pool"
+    </Connection>
+  </Plugin>
+</Plugin>

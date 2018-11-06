@@ -4,7 +4,7 @@ maintainer_email 'you@example.com'
 license 'All Rights Reserved'
 description 'Installs/Configures cassandra-cluster'
 long_description 'Installs/Configures cassandra-cluster'
-version '0.4.1'
+version '0.4.3'
 chef_version '>= 12.14' if respond_to?(:chef_version)
 
 # The `issues_url` points to the location where issues for this cookbook are
@@ -22,3 +22,4 @@ chef_version '>= 12.14' if respond_to?(:chef_version)
 depends 'java'
 depends 'poise-python'
 depends 'tar'
+depends 'collectd'

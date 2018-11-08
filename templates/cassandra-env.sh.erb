@@ -285,6 +285,10 @@ JVM_OPTS="$JVM_OPTS -Dcassandra.metricsReporterConfigFile=<%= node['cassandra'][
 JVM_OPTS="$JVM_OPTS -javaagent:<%= node['cassandra']['lib_dir'] %>/jolokia-jvm-<%= node['cassandra']['jolokia_version'] %>-agent.jar=config=<%= node['cassandra']['conf_dir'] %>/jolokia.properties"
 <% end %>
 
+<% if node[:cassandra][:auto_bootstrap] == "false" %>
+JVM_OPTS="$JVM_OPTS -Dcassandra.auto_bootstrap=false"
+<% end %>
+
 # see
 # https://blogs.oracle.com/jmxetc/entry/troubleshooting_connection_problems_in_jconsole
 # for more on configuring JMX through firewalls, etc. (Short version:

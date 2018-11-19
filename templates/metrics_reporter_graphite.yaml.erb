@@ -2,7 +2,7 @@ graphite:
 -
   period: 30
   timeunit: 'SECONDS'
-  prefix: '<%= node[:hostname] %>.cassandra'
+  prefix: '<%= node[:fqdn].gsub(/\./, '_') %>.cassandra'
   hosts:
    - host: '<%= node[:graphite][:hostname] %>'
      port: 2003

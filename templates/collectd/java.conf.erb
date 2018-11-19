@@ -1,3 +1,7 @@
+# For Cassandra, you don't need to use this plugin basically.
+# Because you can send JVM metrics by metrics-reporter of Cassandra.
+# However, 3.0.7 cannot send them, so this is an alternative solution.
+
 LoadPlugin java
 <Plugin "java">
   JVMArg "-Djava.class.path=/usr/share/collectd/java/collectd-api.jar:/usr/share/collectd/java/generic-jmx.jar"
@@ -67,7 +71,11 @@ LoadPlugin java
     # Connection blocks #
     #####################
     <Connection>
-      ServiceURL "service:jmx:rmi:///jndi/rmi://localhost:7199/jmxrmi"
+      ServiceURL "service:jmx:rmi:///jndi/rmi://localhost:<%= @JMX_PORT_OF_CASSANDRA %>/jmxrmi"
+      <% if node[:cassandra][:jmx_auth] == true %>
+      User "<%= @JMX_AUTH_USER %>"
+      Password "<%= @JMX_AUTH_PASSWORD %>"
+      <% end %>
       Collect "gc-time"
       Collect "gc-count"
       Collect "memory-heap"

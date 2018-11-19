@@ -14,11 +14,3 @@ end
 template "/etc/collectd.d/write_graphite.conf" do
   source 'collectd/write_graphite.conf.erb'
 end
-
-# include_recipe 'collectd_plugin::cpu'
-
-collectd_plugin 'cpu' do
-  user 'root'
-  group 'root'
-  notifies :restart, "collectd_service[#{node['collectd']['service_name']}]", :delayed
-end

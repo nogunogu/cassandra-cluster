@@ -3,7 +3,7 @@ service 'cassandra' do
 end
 
 execute 'remove system data' do
-  command 'rm -rf /var/lib/cassandra/data/system/*'
+  command "rm -rf #{node['cassandra']['data_file_directory']}/system/*""
 end
 
 service 'cassandra' do

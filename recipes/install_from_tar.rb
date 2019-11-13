@@ -1,8 +1,5 @@
 include_recipe 'java'
-
-python_runtime '2'
-python_package 'cassandra-driver'
-
+include_recipe 'cassandra-cluster::cassandra-driver'
 include_recipe 'cassandra-cluster::set_parameters'
 
 deployed_dir = "/opt/apache-cassandra-#{node['cassandra']['tar_version']}"

@@ -13,6 +13,7 @@ default['cassandra']['listen_address'] = 'localhost'
 default['cassandra']['cluster_name'] = 'Test Cluster1'
 default['cassandra']['auto_bootstrap'] = 'true'
 default['cassandra']['rpc_address'] = 'localhost'
+default['cassandra']['data_file_directory'] = '/var/lib/cassandra/data'
 
 # for jmxremote
 default['cassandra']['local_jmx'] = 'yes'

@@ -4,8 +4,7 @@
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
 include_recipe 'java'
-python_runtime '2'
-python_package 'cassandra-driver'
+include_recipe 'cassandra-cluster::cassandra-driver'
 
 apt_repository 'cassandra' do
   uri          'http://www.apache.org/dist/cassandra/debian'
